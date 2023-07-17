@@ -11,6 +11,9 @@ use tracing::Instrument;
 
 pub mod ids;
 pub mod models;
+mod oauth;
+
+pub use oauth::OAuthClient;
 
 pub use chrono;
 

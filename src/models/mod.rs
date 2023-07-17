@@ -1,5 +1,6 @@
 pub mod block;
 pub mod error;
+pub mod oauth;
 pub mod paging;
 pub mod properties;
 pub mod search;
