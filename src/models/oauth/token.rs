@@ -29,3 +29,37 @@ pub struct Owner {
 fn default_workspace() -> bool {
     false
 }
+
+#[cfg(test)]
+mod test {
+    use serde_json::json;
+
+    #[test]
+    fn deserializes_correctly() {
+        let json = json!({
+          "access_token": "redacted_access_token",
+          "token_type": "bearer",
+          "bot_id": "redacted_bot_id",
+          "workspace_name": "redacted_workspace_name",
+          "workspace_icon": null,
+          "workspace_id": "redacted_workspace_id",
+          "owner": {
+            "type": "user",
+            "user": {
+              "object": "user",
+              "id": "redacted_user_id",
+              "name": "redacted_user_name",
+              "avatar_url": "redacted_avatar_url",
+              "type": "person",
+              "person": { "email": "redacted_email" }
+            }
+          },
+          "duplicated_template_id": null
+        });
+
+        let token: super::Token = serde_json::from_value(json).unwrap();
+
+        assert_eq!(token.access_token, "redacted_access_token");
+        assert_eq!(token.bot_id, "redacted_bot_id");
+    }
+}

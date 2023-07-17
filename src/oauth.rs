@@ -107,6 +107,8 @@ impl OAuthClient {
                 .map_err(|source| Error::JsonParseError { source })?);
         }
 
+        println!("token exchange success: {}", success);
+
         if success {
             let result: T =
                 serde_json::from_str(&json).map_err(|source| Error::JsonParseError { source })?;
