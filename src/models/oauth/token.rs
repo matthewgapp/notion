@@ -18,8 +18,14 @@ pub struct Token {
 
 #[derive(Serialize, Deserialize, Debug, Eq, PartialEq, Clone)]
 pub struct Owner {
+    /// not documented by this field can be omitted
+    #[serde(default = "default_workspace")]
     workspace: bool,
     // TODO: should be an enum
     r#type: String,
     user: Option<User>,
+}
+
+fn default_workspace() -> bool {
+    false
 }
