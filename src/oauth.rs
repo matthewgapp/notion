@@ -112,11 +112,17 @@ impl OAuthClient {
                 serde_json::from_str(&json).map_err(|source| Error::JsonParseError { source })?;
             Ok(result)
         } else {
-            let error = serde_json::from_str::<crate::models::error::ErrorResponse>(&json)
+            let error = serde_json::from_str::<OAuthError>(&json)
                 .map_err(|source| Error::JsonParseError { source })?;
-            Err(Error::ApiError { error })
+            Err(Error::OAuthError { error })
         }
     }
+}
+
+#[derive(serde::Serialize, serde::Deserialize, Debug)]
+pub struct OAuthError {
+    error: String,
+    error_description: String,
 }
 
 #[derive(serde::Serialize)]

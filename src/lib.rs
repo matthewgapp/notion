@@ -45,6 +45,10 @@ pub enum Error {
 
     #[error("API Error {}({}): {}", .error.code, .error.status, .error.message)]
     ApiError { error: ErrorResponse },
+
+    // TODO: fix this shit
+    #[error("OAuth Error: {:?}", error)]
+    OAuthError { error: oauth::OAuthError },
 }
 
 /// An API client for Notion.
